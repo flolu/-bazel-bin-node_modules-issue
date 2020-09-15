@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "lib": ["es6"],
+    "target": "es5",
+    "paths": {
+      "@repro/*": ["bazel-bin/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "bazel-out",
+    "bazel-bin",
+    "bazel-testlogs",
+    "bazel-repro",
+    "dist"
+  ]
+}
