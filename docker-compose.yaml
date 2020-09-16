@@ -10,7 +10,8 @@ services:
       - ./tsconfig.json:/tsconfig.json
       - ./server.ts:/server.ts
       - ./bazel-bin:/bazel-bin
-    entrypoint: sh -c  "yarn install --frozen-lockfile && yarn run ts-node-dev -r tsconfig-paths/register server"
+    entrypoint: sh -c "yarn install --frozen-lockfile && yarn run ts-node-dev -r tsconfig-paths/register server"
+    env_file: '.docker.env'
 
   client:
     image: node:lts-alpine
@@ -22,3 +23,4 @@ services:
       - ./client.ts:/client.ts
       - ./bazel-bin:/bazel-bin
     entrypoint: sh -c "yarn install --frozen-lockfile && yarn run ts-node-dev -r tsconfig-paths/register client"
+    env_file: '.docker.env'

@@ -15,8 +15,9 @@ yarn dev
 
 ## Run
 
-_not implemented yet_
-
 ```
-yarn start
+# start server
+yarn start:server
+# start client
+yarn start:client
 ```

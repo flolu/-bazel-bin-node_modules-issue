@@ -1,8 +1,13 @@
 import * as grpc from 'grpc'
+import * as dotenv from 'dotenv'
+dotenv.config({path: '.bazel.env'})
 
 import {Request, Response, Example} from '@repro/example'
 
 const server = new grpc.Server()
+
+const port = process.env.port
+if (!port) throw new Error('Please provide "port" environment variable.')
 
 async function main() {
   const serviceImpl = {
@@ -13,7 +18,7 @@ async function main() {
     },
   }
   server.addService(Example as any, serviceImpl)
-  server.bindAsync('0.0.0.0:9090', grpc.ServerCredentials.createInsecure(), (err, port) => {
+  server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
     server.start()
     console.log('server running on port', port)
   })

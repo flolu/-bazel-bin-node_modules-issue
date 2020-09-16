@@ -1,7 +1,17 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@npm//protoc-gen-ts:index.bzl", "ts_proto_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm")
+load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
 
 package(default_visibility = ["//visibility:public"])
+
+exports_files(["tsconfig.json"])
+
+pkg_npm(
+    name = "example_package",
+    deps = [":example_lib"],
+)
 
 proto_library(
     name = "example_proto",
@@ -9,6 +19,60 @@ proto_library(
 )
 
 ts_proto_library(
-    name = "example",
+    name = "example_lib",
     deps = [":example_proto"],
+)
+
+ts_library(
+    name = "example_ts_lib",
+    srcs = [":example_lib"],
+    module_name = "@repro",
+    deps = [
+        "@npm//@types/google-protobuf",
+        "@npm//google-protobuf",
+        "@npm//grpc",
+    ],
+)
+
+ts_library(
+    name = "server_lib",
+    srcs = ["server.ts"],
+    deps = [
+        ":example_ts_lib",
+        "@npm//dotenv",
+        "@npm//grpc",
+    ],
+)
+
+ts_library(
+    name = "client_lib",
+    srcs = ["client.ts"],
+    deps = [
+        ":example_ts_lib",
+        "@npm//dotenv",
+        "@npm//grpc",
+    ],
+)
+
+filegroup(
+    name = "dotenv",
+    srcs = [".bazel.env"],
+)
+
+nodejs_image(
+    name = "server_image",
+    data = [
+        ":dotenv",
+        ":server_lib",
+    ],
+    entry_point = ":server.ts",
+)
+
+nodejs_image(
+    name = "client_image",
+    data = [
+        ":client_lib",
+        ":dotenv",
+    ],
+    entry_point = ":client.ts",
 )

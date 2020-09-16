@@ -1,12 +1,15 @@
 {
   "scripts": {
-    "start": "echo Not implemented!",
+    "start:client": "bazelisk run //:client_image",
+    "start:server": "bazelisk run //:server_image",
     "dev": "docker-compose -f docker-compose.yaml up --build",
     "build": "bazelisk build //..."
   },
   "devDependencies": {
     "@bazel/bazelisk": "^1.6.1",
+    "@bazel/typescript": "^2.2.0",
     "@types/google-protobuf": "^3.7.3",
+    "dotenv": "^8.2.0",
     "google-protobuf": "^3.13.0",
     "grpc": "^1.24.3",
     "protoc-gen-ts": "^0.3.0",
