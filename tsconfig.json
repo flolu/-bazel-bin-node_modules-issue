@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "strict": true,
+    "strict": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
@@ -11,12 +11,5 @@
       "@repro/*": ["bazel-bin/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "bazel-out",
-    "bazel-bin",
-    "bazel-testlogs",
-    "bazel-repro",
-    "dist"
-  ]
+  "exclude": ["node_modules", "bazel-out", "bazel-bin", "bazel-testlogs", "bazel-repro", "dist"]
 }

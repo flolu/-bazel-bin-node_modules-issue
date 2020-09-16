@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  server:
+    image: node:lts-alpine
+    container_name: repro_server
+    volumes:
+      - ./package.json:/package.json
+      - ./tsconfig.json:/tsconfig.json
+      - ./node_modules:/node_modules
+      - ./server.ts:/server.ts
+      - ./bazel-bin:/bazel-bin
+    command: yarn run ts-node-dev -r tsconfig-paths/register server
+
+  client:
+    image: node:lts-alpine
+    container_name: repro_client
+    volumes:
+      - ./package.json:/package.json
+      - ./tsconfig.json:/tsconfig.json
+      - ./node_modules:/node_modules
+      - ./client.ts:/client.ts
+      - ./bazel-bin:/bazel-bin
+    command: yarn run ts-node-dev -r tsconfig-paths/register client

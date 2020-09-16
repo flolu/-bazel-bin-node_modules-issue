@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "echo Not implemented!",
     "dev": "docker-compose -f docker-compose.yaml up --build",
     "build": "bazelisk build //..."
   },
@@ -24,5 +25,7 @@
     "arrowParens": "avoid",
     "semi": false
   },
-  "version": "0.0.0"
+  "dependencies": {
+    "@grpc/grpc-js": "^1.1.6"
+  }
 }

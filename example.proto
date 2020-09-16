@@ -10,5 +10,5 @@ message Response {
 }
 
 service Example {
-  rpc send(Request) returns (Response);
+  rpc add(Request) returns (Response);
 }
