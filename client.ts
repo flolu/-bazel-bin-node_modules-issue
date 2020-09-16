@@ -1,12 +1,11 @@
-import * as grpc from '@grpc/grpc-js'
+import * as grpc from 'grpc'
 
-import {ExampleClient, Request} from '@repro/example'
+import {ExampleClient, Request, Response} from '@repro/example'
 
 const client = new ExampleClient('repro_server:9090', grpc.credentials.createInsecure())
 
-async function main() {
-  const response = await (client as any).add(new Request({a: 40, b: 2}))
-  console.log({response})
-}
-
-main()
+setInterval(() => {
+  const payload = new Request({a: 40, b: 2})
+  const callback: grpc.requestCallback<Response> = (_err, response) => console.log(response.result)
+  client['add'](payload, callback)
+}, 3000)

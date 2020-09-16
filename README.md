@@ -9,8 +9,6 @@ yarn build
 
 ## Development
 
-_doesn't work yet_
-
 ```
 yarn dev
 ```
