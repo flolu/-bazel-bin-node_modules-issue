@@ -28,9 +28,9 @@ ts_library(
     srcs = [":example_lib"],
     module_name = "@repro",
     deps = [
+        "@npm//@grpc/grpc-js",
         "@npm//@types/google-protobuf",
         "@npm//google-protobuf",
-        "@npm//grpc",
     ],
 )
 
@@ -39,8 +39,8 @@ ts_library(
     srcs = ["server.ts"],
     deps = [
         ":example_ts_lib",
+        "@npm//@grpc/grpc-js",
         "@npm//dotenv",
-        "@npm//grpc",
     ],
 )
 
@@ -49,8 +49,8 @@ ts_library(
     srcs = ["client.ts"],
     deps = [
         ":example_ts_lib",
+        "@npm//@grpc/grpc-js",
         "@npm//dotenv",
-        "@npm//grpc",
     ],
 )
 

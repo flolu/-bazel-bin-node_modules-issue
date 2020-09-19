@@ -1,4 +1,4 @@
-import * as grpc from 'grpc'
+import * as grpc from '@grpc/grpc-js'
 import * as dotenv from 'dotenv'
 dotenv.config({path: '.bazel.env'})
 

@@ -1,4 +1,4 @@
-import * as grpc from 'grpc'
+import * as grpc from '@grpc/grpc-js'
 import * as dotenv from 'dotenv'
 dotenv.config({path: '.bazel.env'})
 
@@ -11,7 +11,10 @@ if (!port) throw new Error('Please provide "port" environment variable.')
 
 async function main() {
   const serviceImpl = {
-    add: (call: grpc.ServerUnaryCall<Request>, callback: grpc.sendUnaryData<Response>) => {
+    add: (
+      call: grpc.ServerUnaryCall<Request, Response>,
+      callback: grpc.sendUnaryData<Response>,
+    ) => {
       const a = call.request?.a
       const b = call.request?.b
       callback(null, new Response({result: a + b}))
