@@ -20,7 +20,7 @@ async function main() {
       callback(null, new Response({result: a + b}))
     },
   }
-  server.addService(Example as any, serviceImpl)
+  server.addService(Example, serviceImpl)
   server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
     server.start()
     console.log('server running on port', port)
