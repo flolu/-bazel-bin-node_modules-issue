@@ -20,6 +20,7 @@ proto_library(
 
 ts_proto_library(
     name = "example_lib",
+    experimental_features = True,
     deps = [":example_proto"],
 )
 

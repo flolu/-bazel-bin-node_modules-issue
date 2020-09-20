@@ -26,6 +26,4 @@ yarn start:client
 
 ## TODO
 
-- Migration from grpc to @grpc/grpc-js [thesayyn/protoc-gen-ts#19](https://github.com/thesayyn/protoc-gen-ts/issues/19)
-
 - Compatibility with Typescript strict mode [thesayyn/protoc-gen-ts#20](https://github.com/thesayyn/protoc-gen-ts/issues/20)

@@ -12,11 +12,8 @@ if (!port) throw new Error('Please provide "port" environment variable.')
 
 const client = new ExampleClient(`${host}:${port}`, grpc.credentials.createInsecure())
 
-setInterval(() => {
+setInterval(async () => {
   const payload = new Request({a: 40, b: 2})
-  const callback: grpc.requestCallback<Response> = (err, response) => {
-    if (err) console.log(err)
-    else console.log(response.result)
-  }
-  client['add'](payload, callback)
+  const {result} = await client.add(payload)
+  console.log(result)
 }, 3000)
